@@ -1,6 +1,4 @@
 <?php
-include 'resourceLinks.php';
-
 function web_scrape($url) {
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

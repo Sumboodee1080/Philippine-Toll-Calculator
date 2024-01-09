@@ -1,19 +1,5 @@
-<?php
-include 'src/api/scraper.php';
 
-// $vehicleClass_pattern = '/<span class="rl_sliders-toggle-inner[^"]*">.*?<strong>(.*?)<\/strong><\/span>/';
-// $vehicleClass_data = extract_data_by_pattern(web_scrape($vehicleClass_link), $vehicleClass_pattern, 1);
-// foreach ($vehicleClass_data as $element) {
-//     echo $element . "<br>";
-// }
-
-$expressways_pattern = '/<a\s+href="([^"]*toll-rates[^"]*)">(.*?)<\/a>/';
-$expressways_data = extract_data_by_pattern(web_scrape($expressways_link), $expressways_pattern, 2);
-foreach ($expressways_data as $element) {
-    echo $element . "<br>";
-}
-?>
-
+<?php  echo ini_get('error_log'); ?>
 <html lang="en">
 
 <head>
@@ -26,17 +12,18 @@ foreach ($expressways_data as $element) {
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <title>Philippines Toll Calculator</title>
 </head>
 
 <body>
     <!-- NAV ITEMS -->
-    <!-- <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="src/img/undraw_electric_car_b-7-hl.svg" alt="" width="50" height="50" class="d-inline-block">
+                <img src="src/img/Philippine Toll Calculator.png" alt="" width="50" height="50" class="d-inline-block">
                 <label style="color: #2B75FF;">P</label><label style="color: #CE1227;">H</label> Toll Calculator
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,24 +46,23 @@ foreach ($expressways_data as $element) {
                     <h5>Select your Destination</h5>
                     <div class="mt-4 mb-2">
                         <label for="expresswayId">Which Expressway are you passing through?</label>
-                        <select class="form-select mt-2" id="expresswayId" required>
-                            <option selected disabled></option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        <div class="spinner-border spinner-border-sm ms-2" role="status" id="expressWayFieldSpinnerWrapper">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <select class="form-select mt-2" id="expresswayId" required></select>
                     </div>
                     <div class="mb-2">
-                        <label for="expresswayId">Select your Vehicle Class <a href="https://trb.gov.ph/index.php/faqs/vehicle-classification" target="_blank"><i class="bi bi-info-circle"></i></a></label>
-                        <select class="form-select mt-2" id="expresswayId" required>
-                            <option selected disabled></option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        <label for="vehicleClassId">Select your Vehicle Class <a href="https://trb.gov.ph/index.php/faqs/vehicle-classification" target="_blank"><i class="bi bi-info-circle"></i></a></label>
+                        <div class="spinner-border spinner-border-sm ms-2" role="status" id="vehicleClassFieldSpinnerWrapper">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <select class="form-select mt-2" id="vehicleClassId" required></select>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2" id="tollEntryFieldWrapper" style="display: none;">
                         <label for="tollEntryId">Where are you entering?</label>
+                        <div class="spinner-border spinner-border-sm ms-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                         <select class="form-select mt-2" id="tollEntryId" required>
                             <option selected disabled></option>
                             <option value="1">One</option>
@@ -84,8 +70,11 @@ foreach ($expressways_data as $element) {
                             <option value="3">Three</option>
                         </select>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2" id="tollExitFieldWrapper" style="display: none;">
                         <label for="tollExitId">Where are you exiting?</label>
+                        <div class="spinner-border spinner-border-sm ms-2" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                         <select class="form-select mt-2" id="tollExitId" required>
                             <option selected disabled></option>
                             <option value="1">One</option>
@@ -135,12 +124,12 @@ foreach ($expressways_data as $element) {
             <div class="h-100">
                 <h3>About</h3>
                 <p>This website is a personal project created to kill time and together consider the needs of having an application that can conveniently calculate the toll fees.<br>Google has a Toll Fee Total Counting feature but is limited to selected regions. This Application helps you have the same functionality. If the Data being shown here is inaccurate, blame the Government Website as the data used here is derived to what is in there xdd.<br>
-                This project is created for free. If you find this website useful, please turn off your adblocker and let me display ads. This way I can earn money from this xoxo</p>
+                    This project is created for free. If you find this website useful, please turn off your adblocker and let me display ads. This way I can earn money from this xoxo</p>
             </div>
         </div>
     </div>
 
-    <script src="src/js//main.js"></script>
+    <script src="src/js/main.js"></script>
 </body>
 
 </html>
