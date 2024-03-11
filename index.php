@@ -60,26 +60,18 @@
                     </div>
                     <div class="mb-2" id="tollEntryFieldWrapper" style="display: none;">
                         <label for="tollEntryId">Where are you entering?</label>
-                        <div class="spinner-border spinner-border-sm ms-2" role="status">
+                        <div class="spinner-border spinner-border-sm ms-2" role="status" id="tollEntryFieldSpinnerWrapper">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                         <select class="form-select mt-2" id="tollEntryId" required>
-                            <option selected disabled></option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                     <div class="mb-2" id="tollExitFieldWrapper" style="display: none;">
                         <label for="tollExitId">Where are you exiting?</label>
-                        <div class="spinner-border spinner-border-sm ms-2" role="status">
+                        <div class="spinner-border spinner-border-sm ms-2" role="status" id="tollExitFieldSpinnerWrapper">
                             <span class="visually-hidden">Loading...</span>
                         </div>
                         <select class="form-select mt-2" id="tollExitId" required>
-                            <option selected disabled></option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
                         </select>
                     </div>
                     <div class="alert alert-primary d-flex align-items-center" role="alert">

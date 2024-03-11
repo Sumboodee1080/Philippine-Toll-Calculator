@@ -3,6 +3,8 @@ const enterFieldWrapper = $("#tollEntryFieldWrapper");
 const exitFieldWrapper = $("#tollExitFieldWrapper");
 const expressWayFieldSpinnerWrapper = $("#expressWayFieldSpinnerWrapper");
 const vehicleClassFieldSpinnerWrapper = $("#vehicleClassFieldSpinnerWrapper");
+const tollEntryFieldSpinnerWrapper = $("#tollEntryFieldSpinnerWrapper");
+const tollExitFieldSpinnerWrapper = $("#tollExitFieldSpinnerWrapper");
 // Wrappers
 
 // global
@@ -65,34 +67,43 @@ function loadInitialData() {
         });
 }
 
-function loadTollPlaza(){
+function loadTollPlaza() {
     expressWayLink = $("#expresswayId").val();
 
     $.post('../src/api/fetchResources.php', {
         method: 'loadTollPlaza',
         expressLink: expressWayLink
     }, function (response) {
-        //var dataArray = response.data;
-        console.log(response);
+        var dataArray = response.data;
+        var valuesArray = Object.values(dataArray);
 
-        // dataArray.forEach(function (item) {
-        //     $("#tollEntryId").append($('<option>', {
-        //         value: item,
-        //         text: item
-        //     }));
+        valuesArray.forEach(function (item, index) {
+            $("#tollEntryId").append($('<option>', {
+                value: item,
+                text: item
+            }));
 
-        //     $("#tollExitId").append($('<option>', {
-        //         value: item,
-        //         text: item
-        //     }));
-        // });
+            var $option = $('<option>', {
+                value: item,
+                text: item
+            });
+
+            $("#tollExitId").append($option);
+
+            if (index === 1) {
+                $option.prop('selected', true);
+            }
+        });
+
+        tollExitFieldSpinnerWrapper.hide();
+        tollEntryFieldSpinnerWrapper.hide();
     }).fail(function (xhr, status, error) {
         var errorResponse = xhr.responseText;
         var errorObject = JSON.parse(errorResponse);
 
         swal({
             title: "Server Error",
-            text: "The Server responded with a Status "+xhr.status+" with message: '"+errorObject.message+"'",
+            text: "The Server responded with a Status " + xhr.status + " with message: '" + errorObject.message + "'",
             icon: "error",
             buttons: {
                 confirm: {

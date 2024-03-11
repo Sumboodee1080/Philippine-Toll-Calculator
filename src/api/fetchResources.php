@@ -80,6 +80,10 @@ if (!empty($method)) {
     exit();
 }
 
+function trimWhiteSpaces($string) {
+    return preg_replace('/^[\pZ\pC]+|[\pZ\pC]+$/u', '', $string);
+}
+
 function fetchVehicleClass()
 {
     global $vehicleClass_link;
@@ -90,12 +94,20 @@ function fetchVehicleClass()
     return $vehicleClass_data;
 }
 
-function loadTollPlaza($expressLink){
+function loadTollPlaza($expressLink) {
     $compiledSourceURL = 'https://trb.gov.ph' . $expressLink;
     $tollPlaza_pattern = '/<td.*?><strong>(.*?)<\/strong><\/td>/';
-    $tollData = array_unique(extract_data_by_pattern(web_scrape($compiledSourceURL), $tollPlaza_pattern, 1));
 
-    return $tollData;
+    // Web scrape the data
+    $scrapedData = web_scrape($compiledSourceURL);
+
+    // Extract data using the pattern
+    $tollData = array_map('trimWhiteSpaces', extract_data_by_pattern($scrapedData, $tollPlaza_pattern, 1));
+
+    // Remove duplicates
+    $uniqueTollData = array_unique($tollData);
+
+    return $uniqueTollData;
 }
 
 function fetchExpressways()
