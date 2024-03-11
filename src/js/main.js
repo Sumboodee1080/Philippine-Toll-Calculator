@@ -67,6 +67,14 @@ function loadInitialData() {
         });
 }
 
+$("#expresswayId").change(function() {
+    $("#tollEntryId").empty();
+    $("#tollExitId").empty();
+    tollExitFieldSpinnerWrapper.show();
+    tollEntryFieldSpinnerWrapper.show();
+    loadTollPlaza();
+});
+
 function loadTollPlaza() {
     expressWayLink = $("#expresswayId").val();
 
