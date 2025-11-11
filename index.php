@@ -1,5 +1,4 @@
-
-<?php  echo ini_get('error_log'); ?>
+<?php echo ini_get('error_log'); ?>
 <html lang="en">
 
 <head>
@@ -82,29 +81,19 @@
                             Add as much trips as you want to calculate the total tolls.
                         </div>
                     </div>
-                    <button type="button" class="btn btn-dark mt-3">Add to Trip List<i class="bi bi-calculator ms-2"></i></button>
+                    <button id="fetchTripBtn" type="button" class="btn btn-dark mt-3">Add to Trip List<i class="bi bi-calculator ms-2"></i></button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="h-100 p-3">
                     <p class="fs-6 fw-light"><strong>Disclaimer: </strong>Data shown here is derived from the Official Website of <a href="https://trb.gov.ph/index.php" target="_blank">Toll Regulatory Board</a>. The accuracy of data being displayed here depends on the data from the website.</p>
+
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <label class="fw-bolder mt-1">Trip List</label>
-                        <button type="button" class="btn btn-outline-secondary">Reset <i class="bi bi-arrow-clockwise"></i></button>
+                        <button id="resetTripsBtn" type="button" class="btn btn-outline-secondary">Reset <i class="bi bi-arrow-clockwise"></i></button>
                     </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <label>Kalayaan Ave. <i class="bi bi-arrow-right fs-3 ms-3 me-3"></i> Gil Puyat Ave.</label><br>
-                            <label>Toll: <label class="fw-bold text-warning">₱40.00</label></label>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <label>Kalayaan Ave. <i class="bi bi-arrow-right fs-3 ms-3 me-3"></i> Gil Puyat Ave.</label><br>
-                            <label>Toll: <label class="fw-bold text-warning">₱40.00</label></label>
-                        </div>
-                    </div>
-                    <h5>Total Toll: ₱80.00</h5>
+                    <div id="tripList"></div>
+                    <h5 id="totalToll">Total Toll: ₱0.00</h5>
                 </div>
             </div>
         </div>
